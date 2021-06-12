@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "font-awesome-sprockets";
+@import "font-awesome";
  a:hover {
      color: #198754 !important;
      background-color: white !important;
@@ -20,3 +22,8 @@
  .btn {
      color: #fff !important;
    }
+.profile-pic{
+  height: 100px;
+  border-radius: 52%;
+  width: 100px;
+}

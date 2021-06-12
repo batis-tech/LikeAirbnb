@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+gem 'font-awesome-sass', '~> 5.15.1'
 # image upload
 gem 'carrierwave','0.10.0'
 gem 'fog','~> 1.37.0'

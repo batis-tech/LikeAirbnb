@@ -1,15 +1,16 @@
 <div class=" property-main-photo" style="background-image:url('<%= property_photo @property %>')">
   <div class="photo-overlay"></div>
 </div>
+<div class="col-12">
 <div class="container mt-5">
   <div class="row">
-    <div class="col-8">
+    <div class="col-sm-8">
       <div class="row">
-        <div class="col-6">
+        <div class="col-sm-6">
           <p class="mb-0"><%= @property.address %></p>
           <p class="h2"><%= @property.price > 0 ? number_to_currency(@property.price, precision:0) : "For sale" %></p>
         </div>
-        <div class="col-6">
+        <div class="col-sm-6">
           <div class="row">
             <div class="col-4 text-center">
               <p class="m-0">
@@ -38,24 +39,26 @@
       <div class="row mt-5 border-top border-bottom pt-4 pb-4 pd-4 mt-4 mb-4">
         <div class="col-6 ">
           <strong class="text-success">Est. Monthly Repayments of
-            <%= number_to_currency(( @property.price / 360), precision: 0) %></strong>
+            <%= number_to_currency(( @property.price - (@property.price * 0.1)) / 360, precision: 0) %></strong>
         </div>
-        <div class="col-6" >
+        <div class="col-6">
           <strong style="float: right;"><%= link_to "Can i afford this property","#",class: "text-success" %></strong>
         </div>
       </div>
     </div>
     <div class="col-4 mt-0">
-      Agent info
       <%= render "properties/agent_details"%>
-
     </div>
-    <div class="col-8 mt-2">
-      <p class="h2">Property Description</p>
-      <p><%= @property.name %></p>
-      <%= simple_format @property.details %>
+    </div>
+    <div class="col-sm-8 mt-2">
+      <p class="h3"><%= @property.name %></p>
+      <p class="h5 mt-2">Property Description</p>
+      <div id="prop-details">
+        <%= simple_format @property.details %>
+      </div>
+      <button type="button" class="btn btn-info m-2" id="toggleDetails">Show more</button>
+      <p>* This rate is based on a 30 years mortgage,after paying an initial 10% down payment</p>
       <!-- <%= link_to 'Edit', edit_property_path(@property) %> | <%= link_to 'Back', properties_path %>-->
     </div>
-
   </div>
 </div>
