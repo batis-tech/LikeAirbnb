@@ -10,8 +10,32 @@ class PropertiesController < ApplicationController
   # GET /properties/1 or /properties/1.json
   def show
     @agent = @property.account
+    @properties_agent = Property.latest.where('id != ?',params[:id])
+
+  end
+  def contact
+    @agents = Account.find(params[:id])
   end
 
+  def email_agent
+    #trigger an email secondary
+
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    email = params[:email]
+    message = params[:message]
+    agent_id = params[:agent_id]
+    # response to script
+    logger.debug "agent_id : #{agent_id}"
+    logger.debug "First name: #{first_name}"
+    logger.debug "Last name: #{last_name}"
+    logger.debug "Email: #{email}"
+    logger.debug "message: #{message}"
+
+      respond_to do |format|
+    format.json { head :no_content}
+    end
+  end
   # GET /properties/new
   def new
     @property = Property.new
@@ -71,6 +95,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :address, :price, :room, :bathrooms, :photo, :photo_cache, :parking_spaces, :details)
+      params.require(:property).permit(:name, :address, :price, :room, :bathrooms, :photo, :photo_cache, :parking_spaces, :details, :for_sale, :available_date)
     end
 end

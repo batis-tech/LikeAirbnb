@@ -2,53 +2,73 @@
   <div class="photo-overlay"></div>
 </div>
 <div class="col-12">
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-sm-8">
-      <div class="row">
-        <div class="col-sm-6">
-          <p class="mb-0"><%= @property.address %></p>
-          <p class="h2"><%= @property.price > 0 ? number_to_currency(@property.price, precision:0) : "For sale" %></p>
-        </div>
-        <div class="col-sm-6">
-          <div class="row">
-            <div class="col-4 text-center">
-              <p class="m-0">
-                <strong>Rooms</strong>
-              </p>
-              <span class="lead">
-                <%= @property.room %></span>
-            </div>
-            <div class="col-4 text-center">
-              <p class="m-0">
-                <strong>Bathrooms</strong>
-              </p>
-              <span class="lead">
-                <%= @property.bathrooms %></span>
-            </div>
-            <div class="col-4 text-center">
-              <p class="m-0">
-                <strong>Parking spaces</strong>
-              </p>
-              <span class="lead">
-                <%= @property.parking_spaces %></span>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm-6">
+            <p class="h4 mb-2"><%= @property.for_sale? ? "For Sale" : "For Rent" %></p>
+            <p class="mb-2"><%= @property.address %></p>
+            <p class="h2 ">
+              <% if @property.for_sale? %>
+                <%= @property.price > 0 ? number_to_currency(@property.price, precision:0) : "Offers Accepted" %>
+              <% else %>
+                <%= @property.price > 0 ? number_to_currency(@property.price, precision:0) : "Open For Enquiries" %>/ Monthly
+              <% end %>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-4 text-center">
+                <small>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck-flatbed" viewbox="0 0 16 16">
+                    <path
+                      d="M11.5 4a.5.5 0 0 1 .5.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-4 0 1 1 0 0 1-1-1v-1h11V4.5a.5.5 0 0 1 .5-.5zM3 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm1.732 0h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4a2 2 0 0 1 1.732 1z"/>
+                  </svg><br>
+                  <%= @property.room %>
+                  Rooms</small>
+              </div>
+              <div class="col-4 text-center">
+                <small>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-minecart" viewbox="0 0 16 16">
+                    <path
+                      d="M4 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8-1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM.115 3.18A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 14 12H2a.5.5 0 0 1-.491-.408l-1.5-8a.5.5 0 0 1 .106-.411zm.987.82 1.313 7h11.17l1.313-7H1.102z"/>
+                  </svg><br>
+                  <%= @property.bathrooms %>
+                  Bathrooms</small>
+              </div>
+              <div class="col-4 text-center">
+                <small>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-minecart" viewbox="0 0 16 16">
+                    <path
+                      d="M4 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8-1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM.115 3.18A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 14 12H2a.5.5 0 0 1-.491-.408l-1.5-8a.5.5 0 0 1 .106-.411zm.987.82 1.313 7h11.17l1.313-7H1.102z"/>
+                  </svg><br>
+                  <%= @property.parking_spaces %>
+                  Parking</small>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="row mt-5 border-top border-bottom pt-4 pb-4 pd-4 mt-4 mb-4">
-        <div class="col-6 ">
-          <strong class="text-success">Est. Monthly Repayments of
-            <%= number_to_currency(( @property.price - (@property.price * 0.1)) / 360, precision: 0) %></strong>
+        <div class="row mt-5 border-top border-bottom pt-4 pb-4 pd-4 mt-4 mb-4">
+          <div class="col-6 ">
+            <% if @property.for_sale? %>
+              <strong class="text-success">Est. Monthly Repayments of
+                <%= number_to_currency(( @property.price - (@property.price * 0.1)) / 360, precision: 0) %></strong>
+            <% else %>
+              <strong class="text-success">Available from
+                <%= @property.available_date.strftime("%a") %>,
+                <%= @property.available_date.day.ordinalize %>
+                <%= @property.available_date.strftime("%b") %></strong>
+            <% end %>
+          </div>
+          <div class="col-6">
+            <strong style="float: right;"><%= link_to "Can i afford this property","#",class: "text-success" %></strong>
+          </div>
         </div>
-        <div class="col-6">
-          <strong style="float: right;"><%= link_to "Can i afford this property","#",class: "text-success" %></strong>
-        </div>
       </div>
-    </div>
-    <div class="col-4 mt-0">
-      <%= render "properties/agent_details"%>
-    </div>
+      <div class="col-4 mt-0">
+        <%= render "properties/agent_details"%>
+      </div>
     </div>
     <div class="col-sm-8 mt-2">
       <p class="h3"><%= @property.name %></p>
@@ -62,3 +82,13 @@
     </div>
   </div>
 </div>
+<section class="mt-5 mb-5">
+  <div class="container">
+    <div class="row">
+
+      <p class="h3 mb-3">Lastest properties</p>
+        <%= render "properties/list" %>
+
+    </div>
+  </div>
+</section>

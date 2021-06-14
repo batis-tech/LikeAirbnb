@@ -3,6 +3,7 @@
   <h3 class="h4"><%= @agent.full_name %></h3>
 
   <p><%= @agent.comapny %></p>
-  <div class="btn btn-info">Call </div>
-  <div class="btn btn-success">Email</div>
-</div>
+
+  <a class="btn btn-success" href="tel:<%= @agent.telephone %>">Call</a>
+  <%= link_to "Profile" ,profile_path(@agent.id),class:"btn btn-warning"%>
+  <%= link_to "Email" ,contact_path(@agent.id),class:"btn btn-info"%>

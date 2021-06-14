@@ -12,9 +12,11 @@
  *
  *= require_tree .
  *= require_self
+
  */
  @import "font-awesome-sprockets";
 @import "font-awesome";
+@import 'toastr';
  a:hover {
      color: #198754 !important;
      background-color: white !important;

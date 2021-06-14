@@ -28,7 +28,7 @@ gem 'font-awesome-sass', '~> 5.15.1'
 # image upload
 gem 'carrierwave','0.10.0'
 gem 'fog','~> 1.37.0'
-
+gem 'toastr-rails'
 # image resizing
 gem 'mini_magick'
 # Reduces boot times through caching; required in config/boot.rb
